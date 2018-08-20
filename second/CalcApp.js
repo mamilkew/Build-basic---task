@@ -63,32 +63,41 @@ function call_power(id) {
 }
 
 function save_form() {
-    const storage = require('electron-json-storage');
-    const dataPath = storage.getDataPath();
-    // console.log(dataPath);
-    storage.set('result_CalcApp', data, function(error) {
-        console.log(error);
-    });
+    if (document.getElementById("cloud_saving").checked) {
+        alert("Cloud!!!");
+    } else {
+        const storage = require('electron-json-storage');
+        const dataPath = storage.getDataPath();
+        // console.log(dataPath);
+        storage.set('result_CalcApp', data, function(error) {
+            console.log(error);
+        });
+    }
 }
 
 function load_form() {
     change_button_color();
-    const storage = require('electron-json-storage');
-    const dataPath = storage.getDataPath();
-    // console.log(dataPath);
-    // Read
-    storage.get('result_CalcApp', function(error, object) {
-        if (error) throw error;
-        console.log(object);
-        data = object;
-        for (let k in object){
-            if (k === "operation") {
-                document.getElementById(object[k]).style.backgroundColor = "lightblue";
-            }
-            else {
-                document.getElementById(k).value = object[k];
-            }
+    if (document.getElementById("cloud_saving").checked) {
+        alert("Cloud!!!");
+    } else {
+        const storage = require('electron-json-storage');
+        const dataPath = storage.getDataPath();
+        // console.log(dataPath);
+        // Read
+        storage.get('result_CalcApp', function(error, object) {
+            if (error) throw error;
+            console.log(object);
+            data = object;
+            for (let k in object){
+                if (k === "operation") {
+                    document.getElementById(object[k]).style.backgroundColor = "lightblue";
+                }
+                else {
+                    document.getElementById(k).value = object[k];
+                }
 
-        }
-    });
+            }
+        });
+    }
+
 }
