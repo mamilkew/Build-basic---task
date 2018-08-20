@@ -15,7 +15,6 @@ jobs:
         name: update-npm
         command: 'sudo npm install npm@latest -g'
     - run:
-        name: install-npm-wee
         command: |
         ls
         
