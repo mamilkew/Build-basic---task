@@ -5,16 +5,20 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/second
+    working_directory: ~/repo
     docker:
     - image: circleci/node:4.8.2
     steps:
     - checkout
+    - run: npm install
+    - run: npm cache clean
     - run:
         name: update-npm
         command: 'sudo npm install -g npm@5'
     - restore_cache:
         key: dependency-cache-{{ checksum "package.json" }}
+
+    - run: npm install
 
     - save_cache:
         key: dependency-cache-{{ checksum "package.json" }}
