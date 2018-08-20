@@ -14,15 +14,14 @@ jobs:
     - run:
         name: update-npm
         command: 'sudo npm install npm@latest -g'
-    
     - run:
           name: install-npm-wee
-          command: 'ls'
+          command: 'cd second'
     
     - restore_cache:
         key: dependency-cache-{{ checksum "package.json" }}
 
-        
+    - run: npm install        
     - save_cache:
         key: dependency-cache-{{ checksum "package.json" }}
         paths:
