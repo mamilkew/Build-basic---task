@@ -11,11 +11,13 @@ jobs:
     steps:
     - checkout
     - run: npm cache verify
-    - run: npm init
+    - run:
+        name: update-npm
+        command: 'sudo npm install npm@latest -g'
     - restore_cache:
         key: dependency-cache-{{ checksum "package.json" }}
 
-    - run: npm install
+    - run: npm install debug
 
     - save_cache:
         key: dependency-cache-{{ checksum "package.json" }}
