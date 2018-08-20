@@ -21,12 +21,12 @@ jobs:
     - restore_cache:
         key: dependency-cache-{{ checksum "package.json" }}
         paths:
-        - second/node_modules
+        - ~/Build-basic---task/second
             
     - save_cache:
         key: dependency-cache-{{ checksum "package.json" }}
         paths:
-        - second/node_modules
+        - ~/Build-basic---task/second/node_modules
     - run:
         name: test
         command: |
