@@ -21,12 +21,14 @@ jobs:
     - restore_cache:
         key: dependency-cache-{{ checksum "package.json" }}
         paths:
-        - ./second/node_modules
+        - second/node_modules
             
     - save_cache:
         key: dependency-cache-{{ checksum "package.json" }}
         paths:
-        - ./second/node_modules
+        - second/node_modules
     - run:
         name: test
-        command: npm test
+        command: |
+          cd second
+          npm test
