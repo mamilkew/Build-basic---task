@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/Build-basic---task/second
+    working_directory: ~/Build-basic---task
     docker:
     - image: circleci/node:8.11.4
     steps:
@@ -14,9 +14,9 @@ jobs:
 #    - run:
 #        name: update-npm
 #        command: 'sudo npm install npm@latest -g'
-    - run:
-          name: install-npm-wee
-          command: 'ls'
+    - run: |
+          cd second
+          npm install
     
     - restore_cache:
         key: dependency-cache-{{ checksum "package.json" }}
