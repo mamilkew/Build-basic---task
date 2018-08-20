@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/Build-basic---task
+    working_directory: ~/Build-basic---task/second
     docker:
     - image: circleci/node:8.11.4
     steps:
