@@ -14,10 +14,11 @@ jobs:
     - run:
         name: update-npm
         command: 'sudo npm install npm@latest -g'
+    
+    - run: npm install debug
+    
     - restore_cache:
         key: dependency-cache-{{ checksum "package.json" }}
-
-    - run: npm install debug
 
     - save_cache:
         key: dependency-cache-{{ checksum "package.json" }}
