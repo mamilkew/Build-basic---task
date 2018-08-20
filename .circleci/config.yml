@@ -15,27 +15,21 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-
+    - run: npm install
 
     steps:
-      - checkout
-      - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - dependency-cache-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-#          - v1-dependencies-
+    - restore_cache:
+        keys:
+        # when lock file changes, use increasingly general patterns to restore cache
+        - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        - node-v1-{{ .Branch }}-
+        - node-v1-
+    - save_cache:
+        paths:
+        - ~/usr/local/lib/node_modules  # location depends on npm version
+        key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
-      - run: npm install
 
-      - save_cache:
-          paths:
-            - ./node_modules
-          key: dependency-cache-{{ checksum "package.json" }}
-        
       # run tests!
       test:
         override:
