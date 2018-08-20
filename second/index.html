@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <script type="text/javascript" src="CalcApp.js"></script>
+</head>
+<body>
+<h1>Build Basic CalcApp.js</h1>
+
+<form>
+    A: <input type="number" name="input_a" id="input_a">
+    <br>
+    B: <input type="number" name="input_b" id="input_b">
+    <br>
+    <button type="button" id="plus" onclick="call_plus(this.id)">+</button>
+    <button type="button" id="minus" onclick="call_minus(this.id)">-</button>
+    <button type="button" id="multiple" onclick="call_multiple(this.id)">x</button>
+    <button type="button" id="division" onclick="call_division(this.id)">/</button>
+    <button type="button" id="power" onclick="call_power(this.id)">Power</button>
+    <br>
+    Result: <input type="text" name="result_A_B" id="result_A_B" value="">
+    <br>
+    <button type="button" id="load_file" onclick="load_form()">Load</button>
+    <button type="button" id="save_file" onclick="save_form()">Save</button>
+</form>
+
+<script>
+    // You can also require other files to run in this process
+    // require('./CalcApp.js');
+</script>
+
+</body>
+</html>
