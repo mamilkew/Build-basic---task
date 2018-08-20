@@ -15,7 +15,6 @@ jobs:
 #        name: update-npm
 #        command: 'sudo npm install npm@latest -g'
     - run: |
-          cd second
           npm install
     
     - restore_cache:
@@ -25,7 +24,7 @@ jobs:
     - save_cache:
         key: dependency-cache-{{ checksum "package.json" }}
         paths:
-        - ./node_modules
+        - node_modules
     - run:
         name: test
         command: npm test
