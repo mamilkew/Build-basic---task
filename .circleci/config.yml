@@ -19,14 +19,12 @@ jobs:
           npm install
     
     - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-        paths:
-        - ~/Build-basic---task/second
+        key: dependency-cache-{{ checksum "second/package.json" }}
             
     - save_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+        key: dependency-cache-{{ checksum "second/package.json" }}
         paths:
-        - ~/Build-basic---task/second/node_modules
+        - ./node_modules
     - run:
         name: test
         command: |
