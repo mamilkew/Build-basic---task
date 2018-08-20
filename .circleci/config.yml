@@ -7,10 +7,9 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-    - image: circleci/node:4.8.2
+    - image: circleci/node:8.11.4
     steps:
     - checkout
-    - run: npm install
     - run: npm cache clean
     - run:
         name: update-npm
