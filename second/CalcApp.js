@@ -66,12 +66,14 @@ function call_power(id) {
 
 function save_form() {
     if (document.getElementById("cloud_saving").checked) {
+        document.getElementById("calculator").disabled = true;
         // Create a storage reference from our storage service
         var storageRef = storage.ref();
         var usersRef = storageRef.child("users/result_CalcApp.json");
         var data_s = JSON.stringify(data);
         usersRef.putString(data_s).then(function(snapshot) {
             console.log('Uploaded a raw string!');
+            document.getElementById("calculator").disabled = false;
         });
     } else {
         const storage = require('electron-json-storage');
@@ -86,6 +88,7 @@ function save_form() {
 function load_form() {
     change_button_color();
     if (document.getElementById("cloud_saving").checked) {
+        document.getElementById("calculator").disabled = true;
         var gsReference = storage.refFromURL('gs://basic-cloud-saving.appspot.com/users/result_CalcApp.json')
         gsReference.getDownloadURL().then(function(url){
             // This can be downloaded directly:
@@ -102,6 +105,7 @@ function load_form() {
                             document.getElementById(k).value = data[k];
                         }
                     }
+                    document.getElementById("calculator").disabled = false;
                 }
             };
             XMLHttp.open("GET", url, true); // true for asynchronous
