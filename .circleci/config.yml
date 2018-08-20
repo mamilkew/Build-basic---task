@@ -16,12 +16,12 @@ jobs:
         command: 'sudo npm install npm@latest -g'
     - run:
           name: install-npm-wee
-          command: 'cd second'
+          command: 'ls /home/circleci/Build-basic---task'
     
     - restore_cache:
         key: dependency-cache-{{ checksum "package.json" }}
 
-    - run: npm install        
+            
     - save_cache:
         key: dependency-cache-{{ checksum "package.json" }}
         paths:
