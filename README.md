@@ -1,7 +1,7 @@
 # Build-basic---task
 
 # For task1
-```text
+```sh
 # Go into the repository
 $ cd first
 # Install dependencies
@@ -10,7 +10,7 @@ $ npm install
 $ npm start
 ```
 # For task2
-```text
+```sh
 # Go into the repository
 $ cd second
 # Install dependencies
