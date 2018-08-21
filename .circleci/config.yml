@@ -33,7 +33,7 @@ jobs:
   deploy-job:
     docker:
     - image: circleci/node:8.11.4
-    working_directory: /tmp/Build-basic---task/
+    working_directory: ~/Build-basic---task/
     steps:
     - run:
       name: Deploy Master to Firebase
@@ -42,7 +42,6 @@ jobs:
 
 workflows:
   version: 2
-
   -deploy:
     jobs:
     - build
