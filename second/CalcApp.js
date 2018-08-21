@@ -76,12 +76,18 @@ function save_form() {
             document.getElementById("calculator").disabled = false;
         });
     } else {
-        const storage = require('electron-json-storage');
-        const dataPath = storage.getDataPath();
-        // console.log(dataPath);
-        storage.set('result_CalcApp', data, function(error) {
-            console.log(error);
-        });
+        // const storage = require('electron-json-storage');
+        // const dataPath = storage.getDataPath();
+        // // console.log(dataPath);
+        // storage.set('result_CalcApp', data, function(error) {
+        //     console.log(error);
+        // });
+        if (window.localStorage) {
+            localStorage.setItem('person', JSON.stringify(data));
+            console.log("Save");
+        } else {
+            alert("Please save to Cloud.");
+        }
     }
 }
 
@@ -114,24 +120,40 @@ function load_form() {
             // Handle any errors from Storage
         });
     } else {
-        const storage = require('electron-json-storage');
-        const dataPath = storage.getDataPath();
-        // console.log(dataPath);
-        // Read
-        storage.get('result_CalcApp', function(error, object) {
-            if (error) throw error;
-            console.log(object);
-            data = object;
-            for (let k in object){
+        // const storage = require('electron-json-storage');
+        // const dataPath = storage.getDataPath();
+        // // console.log(dataPath);
+        // // Read
+        // storage.get('result_CalcApp', function(error, object) {
+        //     if (error) throw error;
+        //     console.log(object);
+        //     data = object;
+        //     for (let k in object){
+        //         if (k === "operation") {
+        //             document.getElementById(object[k]).style.backgroundColor = "lightblue";
+        //         }
+        //         else {
+        //             document.getElementById(k).value = object[k];
+        //         }
+        //
+        //     }
+        // });
+
+        if (window.localStorage) {
+            data = JSON.parse(localStorage.getItem('person'))
+            console.log(data);
+            for (let k in data){
                 if (k === "operation") {
-                    document.getElementById(object[k]).style.backgroundColor = "lightblue";
+                    document.getElementById(data[k]).style.backgroundColor = "lightblue";
                 }
                 else {
-                    document.getElementById(k).value = object[k];
+                    document.getElementById(k).value = data[k];
                 }
 
             }
-        });
+        } else {
+            alert("Please save to Cloud.");
+        }
     }
 
 }
