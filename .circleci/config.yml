@@ -33,21 +33,22 @@ jobs:
   deploy-job:
     docker:
     - image: circleci/node:8.11.4
-    working_directory: ~/Build-basic---task/
+    working_directory: ~/Build-basic---task
     steps:
     - run:
-      name: Deploy Master to Firebase
-      command: ./node_modules/.bin/firebase deploy --token=$1/4ccwEhfXO5Ocms21Zn_caTJzfYHA59eYo3zQ8aHPVe8
+        name: Deploy Master to Firebase
+        command: ./node_modules/.bin/firebase deploy --token=$1/4ccwEhfXO5Ocms21Zn_caTJzfYHA59eYo3zQ8aHPVe8
 
 
 workflows:
   version: 2
+
   -deploy:
     jobs:
     - build
     - deploy-job:
-        requires:
-        - build
-        filters:
-          branches:
-            only: master
+      requires:
+      - build
+      filters:
+        branches:
+          only: master
