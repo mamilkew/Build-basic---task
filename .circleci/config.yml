@@ -2,54 +2,53 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-#version: 2
-#jobs:
-#  build:
-#    working_directory: ~/Build-basic---task/
-#    docker:
-#    - image: circleci/node:8.11.4
-#    steps:
-#    - checkout
-#    - run: npm cache verify
-##    - run:
-##        name: update-npm
-##        command: 'sudo npm install npm@latest -g'
-#    - run: |
-#          cd second
-#          npm install
-#
-#    - restore_cache:
-#        key: dependency-cache-{{ checksum "second/package.json" }}
-#
-#    - save_cache:
-#        key: dependency-cache-{{ checksum "second/package.json" }}
-#        paths:
-#        - ./node_modules
+version: 2
+jobs:
+  build:
+    working_directory: ~/Build-basic---task/
+    docker:
+    - image: circleci/node:8.11.4
+    steps:
+    - checkout
+    - run: npm cache verify
 #    - run:
-#        name: test
-#        command: |
-#          cd second
-#          npm test
+#        name: update-npm
+#        command: 'sudo npm install npm@latest -g'
+    - run: |
+          cd second
+          npm install
 
-deploy-job:
-  docker:
-  - image: circleci/node:8.11.4
-  working_directory: ~/Build-basic---task/
-  steps:
-  - run:
+    - restore_cache:
+        key: dependency-cache-{{ checksum "second/package.json" }}
+
+    - save_cache:
+        key: dependency-cache-{{ checksum "second/package.json" }}
+        paths:
+        - ./node_modules
+    - run:
+        name: test
+        command: |
+          cd second
+          npm test
+  deploy-job:
+    docker:
+    - image: circleci/node:8.11.4
+    working_directory: ~/Build-basic---task/
+    steps:
+    - run:
       name: Deploy Master to Firebase
       command: ./node_modules/.bin/firebase deploy --token=$1/4ccwEhfXO5Ocms21Zn_caTJzfYHA59eYo3zQ8aHPVe8
 
 
-  workflows:
-    version: 2
+workflows:
+  version: 2
 
-    -deploy:
-      jobs:
-      - build-job
-      - deploy-job:
-          requires:
-          - build-job
-          filters:
-            branches:
-              only: master
+  -deploy:
+    jobs:
+    - build-job
+    - deploy-job:
+        requires:
+        - build-job
+        filters:
+          branches:
+            only: master
