@@ -1,6 +1,6 @@
 # Build-basic---task
 
-# For task1
+## For task1
 ```sh
 # Go into the repository
 $ cd first
@@ -9,7 +9,7 @@ $ npm install
 # Run the app
 $ npm start
 ```
-# For task2
+## For task2
 ```sh
 # Go into the repository
 $ cd second
